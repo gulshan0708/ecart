@@ -1,0 +1,6 @@
+projectKey=com.gk:ECart
+serverUrl=http://localhost:9000
+serverVersion=6.7.4.38452
+dashboardUrl=http://localhost:9000/dashboard/index/com.gk:ECart
+ceTaskId=AWbkOm13sOflBMPa7pG8
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWbkOm13sOflBMPa7pG8
