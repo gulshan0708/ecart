@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="users")
-public class User{
+public class UserE{
 
 
 
@@ -22,7 +22,7 @@ public class User{
 	private boolean enabled;
 	
 	@OneToOne(mappedBy="users")
-	private Customer customer;
+	private CustomerE customer;
 
 	public String getUserId() {
 		return userId;
@@ -56,11 +56,11 @@ public class User{
 		this.enabled = enabled;
 	}
 
-	public Customer getCustomer() {
+	public CustomerE getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(Customer customer) {
+	public void setCustomer(CustomerE customer) {
 		this.customer = customer;
 	}
 	

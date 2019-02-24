@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="cartitem")
-public class CartItem {
+public class CartItemE {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -20,11 +20,11 @@ public class CartItem {
 	
 	@ManyToOne
 	@JoinColumn(name="productId")
-	private Product product;
+	private ProductE product;
 	
 	@ManyToOne
 	@JoinColumn(name="cartId")
-	private Cart cart;
+	private CartE cart;
 	
 	public String getCartItemId() {
 		return cartItemId;
@@ -44,16 +44,16 @@ public class CartItem {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public Product getProduct() {
+	public ProductE getProduct() {
 		return product;
 	}
-	public void setProduct(Product product) {
+	public void setProduct(ProductE product) {
 		this.product = product;
 	}
-	public Cart getCart() {
+	public CartE getCart() {
 		return cart;
 	}
-	public void setCart(Cart cart) {
+	public void setCart(CartE cart) {
 		this.cart = cart;
 	}
 	

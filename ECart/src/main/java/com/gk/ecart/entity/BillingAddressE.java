@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "billingAddress")
-public class BillingAddress {
+public class BillingAddressE {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,7 +21,7 @@ public class BillingAddress {
 	private String country;
 	
 	@OneToOne(mappedBy = "billingAddress")
-	private Customer customer;
+	private CustomerE customer;
 	
 	public String getBillingAddressId() {
 		return billingAddressId;
@@ -59,10 +59,10 @@ public class BillingAddress {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public Customer getCustomer() {
+	public CustomerE getCustomer() {
 		return customer;
 	}
-	public void setCustomer(Customer customer) {
+	public void setCustomer(CustomerE customer) {
 		this.customer = customer;
 	}
 	

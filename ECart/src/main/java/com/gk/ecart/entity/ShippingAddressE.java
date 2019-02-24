@@ -8,8 +8,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "shippingAddress")
-public class ShippingAddress {
+@Table(name = "ShippingAddressE")
+public class ShippingAddressE {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,8 +20,8 @@ public class ShippingAddress {
 	private String zipcode;
 	private String country;
 	
-	@OneToOne(mappedBy = "shippingAddress")
-	private Customer customer;
+	@OneToOne(mappedBy = "ShippingAddressE")
+	private CustomerE customer;
 	public String getShippingAddressId() {
 		return shippingAddressId;
 	}
@@ -58,10 +58,10 @@ public class ShippingAddress {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public Customer getCustomer() {
+	public CustomerE getCustomer() {
 		return customer;
 	}
-	public void setCustomer(Customer customer) {
+	public void setCustomer(CustomerE customer) {
 		this.customer = customer;
 	}
 	

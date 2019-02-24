@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="cart")
-public class Cart implements Serializable{
+public class CartE implements Serializable{
 	
 	
 	private static final long serialVersionUID = 1L;
@@ -26,10 +26,10 @@ public class Cart implements Serializable{
 	
 	@OneToOne
 	@JoinColumn(name="customerId")
-	private Customer customer;
+	private CustomerE customer;
 	
 	@OneToOne(mappedBy="cart",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	List<CartItem> cartItems;
+	List<CartItemE> cartItems;
 	
 	private double price;
 	
@@ -39,16 +39,16 @@ public class Cart implements Serializable{
 	public void setCartId(String cartId) {
 		this.cartId = cartId;
 	}
-	public Customer getCustomer() {
+	public CustomerE getCustomer() {
 		return customer;
 	}
-	public void setCustomer(Customer customer) {
+	public void setCustomer(CustomerE customer) {
 		this.customer = customer;
 	}
-	public List<CartItem> getCartItems() {
+	public List<CartItemE> getCartItems() {
 		return cartItems;
 	}
-	public void setCartItems(List<CartItem> cartItems) {
+	public void setCartItems(List<CartItemE> cartItems) {
 		this.cartItems = cartItems;
 	}
 	public double getPrice() {

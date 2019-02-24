@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="item")
-public class Product  {
+public class ProductE  {
 
 	
 

@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="customerorder")
-public class CustomerOrder {
+public class CustomerOrderE {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -18,19 +18,19 @@ public class CustomerOrder {
 	
 	@OneToOne
 	@JoinColumn(name = "cartId")
-	private Cart cart;
+	private CartE cart;
 	
 	@OneToOne
 	@JoinColumn(name = "customerId")
-	private Customer customer;
+	private CustomerE customer;
 	
 	@OneToOne
 	@JoinColumn(name = "shippingAddressId")
-	private ShippingAddress shippingAddress;
+	private ShippingAddressE shippingAddress;
 	
 	@OneToOne
 	@JoinColumn(name = "billingAddressId")
-	private BillingAddress billingAddress;
+	private BillingAddressE billingAddress;
 	
 	public String getCustomerOrderId() {
 		return customerOrderId;
@@ -38,28 +38,28 @@ public class CustomerOrder {
 	public void setCustomerOrderId(String customerOrderId) {
 		this.customerOrderId = customerOrderId;
 	}
-	public Cart getCart() {
+	public CartE getCart() {
 		return cart;
 	}
-	public void setCart(Cart cart) {
+	public void setCart(CartE cart) {
 		this.cart = cart;
 	}
-	public Customer getCustomer() {
+	public CustomerE getCustomer() {
 		return customer;
 	}
-	public void setCustomer(Customer customer) {
+	public void setCustomer(CustomerE customer) {
 		this.customer = customer;
 	}
-	public ShippingAddress getShippingAddress() {
+	public ShippingAddressE getShippingAddress() {
 		return shippingAddress;
 	}
-	public void setShippingAddress(ShippingAddress shippingAddress) {
+	public void setShippingAddress(ShippingAddressE shippingAddress) {
 		this.shippingAddress = shippingAddress;
 	}
-	public BillingAddress getBillingAddress() {
+	public BillingAddressE getBillingAddress() {
 		return billingAddress;
 	}
-	public void setBillingAddress(BillingAddress billingAddress) {
+	public void setBillingAddress(BillingAddressE billingAddress) {
 		this.billingAddress = billingAddress;
 	}
 	

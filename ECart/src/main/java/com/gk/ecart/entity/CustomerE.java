@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="customer")
-public class Customer {
+public class CustomerE {
     
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,19 +23,21 @@ public class Customer {
 	
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name = "shippingAddressId")
-	private ShippingAddress shippingAddress;
+	private ShippingAddressE shippingAddress;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "billingAddressId")
-	private BillingAddress billingAddress;
+	private BillingAddressE billingAddress;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId")
-	private User user;
+	private UserE user;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "cartId")
-	private Cart cart;
+	private CartE cart;
+	
+	
 	public String getCustomerId() {
 		return customerId;
 	}
@@ -60,28 +62,28 @@ public class Customer {
 	public void setCustomerPhone(String customerPhone) {
 		this.customerPhone = customerPhone;
 	}
-	public ShippingAddress getShippingAddress() {
+	public ShippingAddressE getShippingAddress() {
 		return shippingAddress;
 	}
-	public void setShippingAddress(ShippingAddress shippingAddress) {
+	public void setShippingAddress(ShippingAddressE shippingAddress) {
 		this.shippingAddress = shippingAddress;
 	}
-	public BillingAddress getBillingAddress() {
+	public BillingAddressE getBillingAddress() {
 		return billingAddress;
 	}
-	public void setBillingAddress(BillingAddress billingAddress) {
+	public void setBillingAddress(BillingAddressE billingAddress) {
 		this.billingAddress = billingAddress;
 	}
-	public User getUser() {
+	public UserE getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(UserE user) {
 		this.user = user;
 	}
-	public Cart getCart() {
+	public CartE getCart() {
 		return cart;
 	}
-	public void setCart(Cart cart) {
+	public void setCart(CartE cart) {
 		this.cart = cart;
 	}
 	
