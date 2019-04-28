@@ -41,7 +41,7 @@
 	
 	Password: 
 	<input type="password" placeholder="Enter Password.." 	name="password">	</input>
-<%-- 
+
 		<hr />
 		<br>
 		<div>
@@ -105,7 +105,7 @@
 		<br>
 	confirm password:	<input type="password" placeholder="********" 		class="form-control" id="confirmpass" />
 	
-	 --%>
+	
 	<div class="form-actions">
 		<button type="submit" class="btn btn-lg btn-info"
 						onclick="return Validate()">Submit</button>

@@ -1,5 +1,7 @@
 package com.gk.ecart.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.gk.ecart.entity.User;
 import com.gk.ecart.model.TestUser;
 import com.gk.ecart.service.TestUserService;
 @Controller
@@ -40,5 +43,10 @@ public class TestUserController {
 		model.addAttribute("registrationSuccess", "Registered Successfully. Login using username and password");
 
 		return "testlogin";
+	}
+	@RequestMapping(value="/getUserlist")
+	public String getUserList(){
+		testUserService.getUserList();
+		return "testregister";
 	}
 }

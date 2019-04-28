@@ -1,10 +1,13 @@
 package com.gk.ecart.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gk.ecart.dao.TestUserDAO;
 import com.gk.ecart.entity.TestUserE;
+import com.gk.ecart.entity.User;
 import com.gk.ecart.model.TestUser;
 @Service
 public class TestUserService {
@@ -23,5 +26,10 @@ public class TestUserService {
 		tuser.setPhoneNo(testUser.getPhoneNo());
 		
 		tuserDao.addTestUser(tuser);
+	}
+	
+public void getUserList(){
+		
+		tuserDao.getUserList();
 	}
 }
