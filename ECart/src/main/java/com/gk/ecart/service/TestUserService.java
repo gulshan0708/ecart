@@ -28,8 +28,8 @@ public class TestUserService {
 		tuserDao.addTestUser(tuser);
 	}
 	
-public void getUserList(){
+public List<User> getUserList(){
 		
-		tuserDao.getUserList();
+		return tuserDao.getUserList();
 	}
 }

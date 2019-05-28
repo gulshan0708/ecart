@@ -44,11 +44,12 @@ public class TestUserDAO {
 		
 	}
 	
-	public void getUserList() {
+	public List<User> getUserList() {
 		SessionFactory sf=HibernateUtil.getSessionFactory();
 		Session session=sf.openSession();
 		org.hibernate.Transaction tx=session.beginTransaction();
-
+		List<User> userList;
+		try {	
 		CriteriaBuilder cb=session.getCriteriaBuilder();
 		CriteriaQuery<User> cquery= cb.createQuery(User.class);
 		
@@ -56,11 +57,17 @@ public class TestUserDAO {
 		cquery.select(userRoot);
 		
 		org.hibernate.query.Query<User> users=session.createQuery(cquery);
-		List<User> userList=users.getResultList();
-		for(User u: userList) {
-			System.out.println(u.getEmail());
+		 userList=users.getResultList();
+		
 		}
-				
+		finally {
+			session.close();
+			sf.close();
+		}
+		/*
+		 * for(User u: userList) { System.out.println(u.getEmail()); }
+		 */
+		return userList;			
 				
 		
 		
