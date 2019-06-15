@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +22,7 @@ import com.gk.ecart.entity.User;
 import com.gk.ecart.exception.UserNotFoundException;
 import com.gk.ecart.model.TestUser;
 import com.gk.ecart.service.TestUserService;
+import com.gk.ecart.service.UserServiceImpl;
 @Controller
 public class TestUserController {
 
@@ -66,6 +68,15 @@ public class TestUserController {
 		}
 		return userList;
 	}
+	
+	@RequestMapping(value="/getUserByEmail")
+	public String getUserByEmail() {
+		String email="vk@gmail.com";
+		User user=testUserService.getByEmail(email);
+		System.out.println(user.getFirstName());
+		return "testlogin";
+	}
+	
 	
 	@ExceptionHandler
 	public ModelAndView employeeNotFoundException(HttpServletRequest request,Exception ex) {

@@ -32,4 +32,9 @@ public List<User> getUserList(){
 		
 		return tuserDao.getUserList();
 	}
+
+public User getByEmail(String email){
+	
+	return tuserDao.getUserByEmail(email);
+}
 }

@@ -31,10 +31,20 @@ public class User implements Serializable {
 	private String contactNumber;
 	private String role;
 	private String password;
+	private boolean enabled;
 	@Transient
 	private String confirmPassword;
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Cart cart;
+	
+
+	public boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
 	public Cart getCart() {
 		return cart;

@@ -11,6 +11,7 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import com.gk.ecart.dao.HibernateUtil;
 import com.gk.ecart.dao.JPAUtil;
@@ -18,53 +19,50 @@ import com.gk.ecart.dao.UserDAO;
 import com.gk.ecart.entity.Address;
 import com.gk.ecart.entity.User;
 
-public class UserDAOImpl implements UserDAO{
-	
-	SessionFactory sessionFactory=HibernateUtil.getSessionFactory();
+@Repository
+public class UserDAOImpl implements UserDAO {
+
+	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	EntityManager entityManager;
 	Session session;
 
 	public User getByEmail(String email) {
-		session=sessionFactory.openSession();
-		
-		
-		CriteriaBuilder cbuilder=session.getCriteriaBuilder();
-		CriteriaQuery<User> cquery=cbuilder.createQuery(User.class);
-		Root<User> root=cquery.from(User.class);
-		
-		cquery.select(root).where(cbuilder.equal(root.get("email"),email));
-		
-		
-		org.hibernate.query.Query<User> query=session.createQuery(cquery);
-		
-		User user=query.getSingleResult();
-		
-		
-		
+		session = sessionFactory.openSession();
+
+		CriteriaBuilder cbuilder = session.getCriteriaBuilder();
+		CriteriaQuery<User> cquery = cbuilder.createQuery(User.class);
+		Root<User> root = cquery.from(User.class);
+
+		cquery.select(root).where(cbuilder.equal(root.get("email"), email));
+
+		org.hibernate.query.Query<User> query = session.createQuery(cquery);
+
+		User user = query.getSingleResult();
+
 		return user;
 	}
 
 	public User get(int id) {
 		// TODO Auto-generated method stub
 		try {
-		entityManager=JPAUtil.getEmf().createEntityManager();
-		CriteriaBuilder cBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<User> cquery= cBuilder.createQuery(User.class);
-		Root<User> root= cquery.from(User.class);
-		
-		cquery.select(root).where(cBuilder.equal(root.get("id"), id));
-		
-		
-		Query query=entityManager.createQuery(cquery);
-		
-		User user =(User)query.getSingleResult();
-		
+			System.out.println("inside get");
+			entityManager = JPAUtil.getEmf().createEntityManager();
+			System.out.println("after entity manager");
+			CriteriaBuilder cBuilder = entityManager.getCriteriaBuilder();
+			CriteriaQuery<User> cquery = cBuilder.createQuery(User.class);
+			Root<User> root = cquery.from(User.class);
 
-		return user;
-		}catch (Exception e) {
+			cquery.select(root).where(cBuilder.equal(root.get("id"), id));
+
+			Query query = entityManager.createQuery(cquery);
+
+			User user = (User) query.getSingleResult();
+
+			return user;
+		} catch (Exception e) {
 			// TODO: handle exception
 			return null;
-		}finally {
+		} finally {
 			entityManager.close();
 
 		}
@@ -72,43 +70,46 @@ public class UserDAOImpl implements UserDAO{
 
 	public boolean add(User user) {
 		try {
-		entityManager=JPAUtil.getEmf().createEntityManager();
-		entityManager.getTransaction().begin();
-		entityManager.persist(user);
-		entityManager.getTransaction().commit();
-		return true;
-		}catch (Exception e) {
+			System.out.println("inside add user");
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			System.out.println("adding user");
+			session.persist(user);
+			System.out.println("User added successfully");
+			session.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
 			// TODO: handle exception
-			entityManager.getTransaction().rollback();
+			session.getTransaction().rollback();
+			String n = "Hi There it's in add user catch exception";
 			return false;
+		} finally {
+			// entityManager.close();
+			session.close();
 		}
-		finally {
-			entityManager.close();
-		}
-		
-		
+
 	}
 
 	public Address getAddress(int addressId) {
 
 		try {
-			entityManager=JPAUtil.getEmf().createEntityManager();
+			entityManager = JPAUtil.getEmf().createEntityManager();
 			entityManager.getTransaction().begin();
-			CriteriaBuilder cbuilder= entityManager.getCriteriaBuilder();
-			CriteriaQuery<Address> cquery= cbuilder.createQuery(Address.class);
-			Root<Address> root= cquery.from(Address.class);
-			
+			CriteriaBuilder cbuilder = entityManager.getCriteriaBuilder();
+			CriteriaQuery<Address> cquery = cbuilder.createQuery(Address.class);
+			Root<Address> root = cquery.from(Address.class);
+
 			cquery.select(root).where(cbuilder.equal(root.get("addressId"), addressId));
-			Query query=entityManager.createQuery(cquery);
-			
-			Address address=(Address) query.getSingleResult();
+			Query query = entityManager.createQuery(cquery);
+
+			Address address = (Address) query.getSingleResult();
 			entityManager.getTransaction().commit();
 			return address;
 		} catch (Exception ex) {
 			// TODO: handle exception
 			System.out.println(ex.getMessage());
 			return null;
-		}finally {
+		} finally {
 			entityManager.close();
 
 		}
@@ -116,58 +117,56 @@ public class UserDAOImpl implements UserDAO{
 
 	public boolean addAddress(Address address) {
 		try {
-			entityManager=JPAUtil.getEmf().createEntityManager();
+			entityManager = JPAUtil.getEmf().createEntityManager();
 			entityManager.getTransaction().begin();
 			entityManager.persist(address);
 			entityManager.getTransaction().commit();
 			return true;
-			}catch (Exception e) {
-				entityManager.getTransaction().rollback();
-				return false;
-			}
-			finally {
-				entityManager.close();
-			}
-			
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			return false;
+		} finally {
+			entityManager.close();
+		}
+
 	}
 
 	public boolean updateAddress(Address address) {
 		try {
-			entityManager=JPAUtil.getEmf().createEntityManager();
+			entityManager = JPAUtil.getEmf().createEntityManager();
 			entityManager.getTransaction().begin();
 			entityManager.merge(address);
 			entityManager.getTransaction().commit();
 			return true;
-			}catch (Exception e) {
-				entityManager.getTransaction().rollback();
-				return false;
-			}
-			finally {
-				entityManager.close();
-			}
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			return false;
+		} finally {
+			entityManager.close();
+		}
 	}
 
 	public Address getBillingAddress(int userId) {
-	
+
 		try {
-			entityManager=JPAUtil.getEmf().createEntityManager();
+			entityManager = JPAUtil.getEmf().createEntityManager();
 			entityManager.getTransaction().begin();
-			CriteriaBuilder cbuilder= entityManager.getCriteriaBuilder();
-			CriteriaQuery<Address> cquery= cbuilder.createQuery(Address.class);
-			Root<Address> root= cquery.from(Address.class);
-			
+			CriteriaBuilder cbuilder = entityManager.getCriteriaBuilder();
+			CriteriaQuery<Address> cquery = cbuilder.createQuery(Address.class);
+			Root<Address> root = cquery.from(Address.class);
+
 			cquery.select(root).where(cbuilder.equal(root.get("userId"), userId),
 					cbuilder.equal(root.get("isBilling"), true));
-			Query query=entityManager.createQuery(cquery);
-			
-			Address address=(Address) query.getSingleResult();
+			Query query = entityManager.createQuery(cquery);
+
+			Address address = (Address) query.getSingleResult();
 			entityManager.getTransaction().commit();
 			return address;
 		} catch (Exception ex) {
 			// TODO: handle exception
 			System.out.println(ex.getMessage());
 			return null;
-		}finally {
+		} finally {
 			entityManager.close();
 
 		}
@@ -175,26 +174,26 @@ public class UserDAOImpl implements UserDAO{
 
 	public List<Address> listShippingAddress(int userId) {
 		try {
-			entityManager=JPAUtil.getEmf().createEntityManager();
+			entityManager = JPAUtil.getEmf().createEntityManager();
 			entityManager.getTransaction().begin();
-			CriteriaBuilder cbuilder= entityManager.getCriteriaBuilder();
-			CriteriaQuery<Address> cquery= cbuilder.createQuery(Address.class);
-			Root<Address> root= cquery.from(Address.class);
-			
+			CriteriaBuilder cbuilder = entityManager.getCriteriaBuilder();
+			CriteriaQuery<Address> cquery = cbuilder.createQuery(Address.class);
+			Root<Address> root = cquery.from(Address.class);
+
 			cquery.select(root).where(cbuilder.equal(root.get("userId"), userId),
 					cbuilder.equal(root.get("isShipping"), true));
-			Query query=entityManager.createQuery(cquery);
-			
-			List<Address> addresslist= query.getResultList();
+			Query query = entityManager.createQuery(cquery);
+
+			List<Address> addresslist = query.getResultList();
 			entityManager.getTransaction().commit();
 			return addresslist;
 		} catch (Exception ex) {
 			// TODO: handle exception
 			System.out.println(ex.getMessage());
 			return null;
-		}finally {
+		} finally {
 			entityManager.close();
-	}
+		}
 
-}
+	}
 }

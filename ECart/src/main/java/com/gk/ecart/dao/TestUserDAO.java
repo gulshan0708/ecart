@@ -21,7 +21,8 @@ import com.gk.ecart.entity.User;
 
 @Repository
 public class TestUserDAO {
-
+	SessionFactory sf=HibernateUtil.getSessionFactory();
+	Session session;
 	
 	
 	public void addTestUser(TestUserE tuser) {
@@ -45,7 +46,6 @@ public class TestUserDAO {
 	}
 	
 	public List<User> getUserList() {
-		SessionFactory sf=HibernateUtil.getSessionFactory();
 		Session session=sf.openSession();
 		org.hibernate.Transaction tx=session.beginTransaction();
 		List<User> userList;
@@ -68,9 +68,26 @@ public class TestUserDAO {
 		 * for(User u: userList) { System.out.println(u.getEmail()); }
 		 */
 		return userList;			
-				
-		
-		
-		
+					
 	}
+	public User getUserByEmail(String email) {
+		session=sf.openSession();
+		
+		
+		CriteriaBuilder cbuilder=session.getCriteriaBuilder();
+		CriteriaQuery<User> cquery=cbuilder.createQuery(User.class);
+		Root<User> root=cquery.from(User.class);
+		
+		cquery.select(root).where(cbuilder.equal(root.get("email"),email));
+		
+		
+		org.hibernate.query.Query<User> query=session.createQuery(cquery);
+		
+		User user=query.getSingleResult();
+		
+		System.out.println("Calling user by email");
+		
+		return user;
+	}
+	
 }
