@@ -12,13 +12,14 @@ import javax.transaction.Transaction;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import com.gk.ecart.dao.CartLineDAO;
 import com.gk.ecart.dao.HibernateUtil;
 import com.gk.ecart.entity.Cart;
 import com.gk.ecart.entity.CartLine;
 import com.gk.ecart.entity.OrderDetail;
-
+@Repository
 public class CartLineDAOImpl implements CartLineDAO {
 	SessionFactory sf = HibernateUtil.getSessionFactory();
 	Session session;
